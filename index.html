@@ -223,6 +223,16 @@
     .ledger input.rate{width:74px;font-size:14.5px;padding:5px 6px}
     .stop{grid-template-columns:70px 1fr;gap:12px}
     .fact{border-right:0;border-bottom:1px solid rgba(255,255,255,.14)}
+
+    /* terms box -> stacked cards, matching .flags on mobile */
+    .terms{background:transparent;border-left:0;border-radius:0;padding:0;margin-top:22px}
+    .terms dl{display:block}
+    .terms dt{
+      display:block;white-space:normal;font-size:16px;
+      border-top:3px solid var(--moss);padding-top:14px;margin-top:18px;
+    }
+    .terms dt:first-child{margin-top:0}
+    .terms dd{display:block;font-size:15px;margin:5px 0 0}
   }
   @media (max-width:420px){
     .ctl input[type=number]{width:88px}
