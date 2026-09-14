@@ -52,10 +52,6 @@
     border-bottom:6px solid var(--patana);
   }
   .top .wrap{padding-bottom:0}
-  .kicker{
-    font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.04em;
-    color:var(--patana-soft);margin:0 0 14px;
-  }
   h1{
     font-size:clamp(44px,10.5vw,116px);
     line-height:.86;
@@ -225,14 +221,187 @@
     .console{background:#fff;color:#000;border:1px solid #000}
     .seg,.actions{display:none}
     .opt.win{background:#fff;color:#000;border:2px solid #000}
+    .altrail,.scene,.patana-band,.flora,.bird{display:none!important}
+    .reveal{opacity:1!important;transform:none!important}
+    .heroshift{transform:none!important;opacity:1!important}
+  }  /* ---------- parallax nature scene ---------- */
+  header.top{position:relative;overflow:hidden}
+  .hero{position:relative}
+  .scene{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .scene .sky{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(120% 80% at 72% 8%, rgba(110,154,174,.22), rgba(110,154,174,0) 60%),
+      linear-gradient(180deg,#0A1714 0%,#14231D 46%,#1B2E26 100%);
   }
+  .ridge{position:absolute;left:-6%;width:112%;bottom:0;will-change:transform}
+  .ridge svg{display:block;width:100%}
+  .ridge.far svg{height:210px}
+  .ridge.mid svg{height:160px}
+  .ridge.near svg{height:104px}
+
+  .mist{
+    position:absolute;left:-35%;width:170%;
+    background:radial-gradient(ellipse at 50% 50%, rgba(223,233,229,.34), rgba(223,233,229,0) 68%);
+    filter:blur(16px);will-change:transform;pointer-events:none;
+  }
+  .mist.m1{bottom:186px;height:120px;animation:drift 47s ease-in-out infinite alternate}
+  .mist.m2{bottom:108px;height:86px;opacity:.72;animation:drift 33s ease-in-out infinite alternate-reverse}
+  .mist.m3{bottom:26px;height:150px;opacity:.5;animation:drift 65s ease-in-out infinite alternate}
+  @keyframes drift{from{transform:translate3d(-7%,0,0)}to{transform:translate3d(7%,0,0)}}
+
+  .puff{
+    position:absolute;border-radius:50%;filter:blur(22px);
+    background:rgba(223,233,229,.16);pointer-events:none;
+  }
+  @keyframes rise{
+    0%{transform:translate3d(0,22px,0) scale(.92);opacity:0}
+    18%{opacity:.85}
+    100%{transform:translate3d(46px,-96px,0) scale(1.28);opacity:0}
+  }
+  .puff.p1{width:170px;height:96px;left:8%;bottom:130px;animation:rise 21s linear infinite}
+  .puff.p2{width:230px;height:120px;left:44%;bottom:100px;animation:rise 27s linear infinite 6s}
+  .puff.p3{width:140px;height:80px;left:71%;bottom:150px;animation:rise 24s linear infinite 12s}
+  .puff.p4{width:200px;height:110px;left:22%;bottom:70px;animation:rise 31s linear infinite 17s}
+
+  .top .wrap,.facts{position:relative;z-index:2}
+  .heroshift{will-change:transform,opacity}
+
+  /* ---------- altitude rail ---------- */
+  .altrail{
+    position:fixed;right:20px;top:16vh;height:66vh;width:44px;z-index:40;
+    pointer-events:none;opacity:0;transition:opacity .5s ease;
+  }
+  .altrail.on{opacity:1}
+  .altrail .track{
+    position:absolute;left:21px;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,var(--patana),rgba(94,114,117,.35));
+  }
+  .altrail .tick{position:absolute;left:14px;width:16px;height:1px;background:var(--rule-strong)}
+  .altrail .tick.t-top{top:0}
+  .altrail .tick.t-bot{bottom:0}
+  .altrail .dot{
+    position:absolute;left:14px;width:16px;height:16px;border-radius:50%;
+    background:var(--patana);border:3px solid var(--paper);bottom:0;
+    box-shadow:0 2px 10px rgba(22,38,31,.35);
+    transition:bottom .12s linear;
+  }
+  .altrail .val{
+    position:absolute;right:30px;bottom:-9px;white-space:nowrap;
+    font-family:var(--display);font-size:12.5px;font-weight:600;color:var(--moss);
+    background:var(--paper);padding:2px 7px;border-radius:4px;
+    box-shadow:0 1px 6px rgba(22,38,31,.14);
+  }
+  @media (max-width:1180px){.altrail{display:none}}
+
+  /* ---------- scroll reveal ---------- */
+  .reveal{opacity:0;transform:translate3d(0,26px,0);transition:opacity .75s ease,transform .75s cubic-bezier(.22,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}
+  .reveal.d2{transition-delay:.16s}
+
+  /* ---------- patana band ---------- */
+  .patana-band{position:relative;height:120px;margin-top:64px;overflow:hidden}
+  .patana-band svg{position:absolute;bottom:0;left:0;width:100%;height:120px}
+  .blade{transform-origin:bottom center;animation:sway 7s ease-in-out infinite alternate}
+  .blade:nth-child(2n){animation-duration:9s;animation-delay:-2s}
+  .blade:nth-child(3n){animation-duration:11s;animation-delay:-4s}
+  @keyframes sway{from{transform:rotate(-2.4deg)}to{transform:rotate(2.4deg)}}
+
+  @media (prefers-reduced-motion:reduce){
+    .mist,.puff,.blade,.frond,.canopy,.deer-head,.bird,.bird .wings{animation:none!important}
+    .bird{display:none}
+    .puff{opacity:.35}
+    .reveal{opacity:1;transform:none;transition:none}
+    .altrail .dot{transition:none}
+  }
+  /* ---------- flora & fauna backdrops ---------- */
+  body{overflow-x:hidden}
+  section{position:relative}
+  section > *{position:relative;z-index:1}
+  .flora{
+    position:absolute;z-index:0;pointer-events:none;will-change:transform;
+    color:var(--moss);
+  }
+  .flora svg{display:block;width:100%;height:auto}
+
+  .flora.fern{top:-10px;right:-70px;width:210px;opacity:.14}
+  .flora.tree{bottom:-24px;left:-84px;width:250px;opacity:.13}
+  .flora.deer{top:30px;right:-30px;width:250px;opacity:.11}
+  .flora.treeline{bottom:-34px;left:0;width:100%;opacity:.09}
+  .flora.fern2{bottom:40px;right:-60px;width:170px;opacity:.12}
+
+  .bird{position:absolute;z-index:0;pointer-events:none;color:var(--slate);opacity:.32}
+  .bird svg{display:block;width:100%;height:auto}
+  @keyframes glide{
+    0%{transform:translate3d(-12vw,0,0)}
+    50%{transform:translate3d(46vw,-26px,0)}
+    100%{transform:translate3d(108vw,6px,0)}
+  }
+  @keyframes flap{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.62)}}
+  .bird.b1{top:52px;width:34px;animation:glide 58s linear infinite}
+  .bird.b2{top:96px;width:22px;animation:glide 74s linear infinite -22s}
+  .bird.b3{top:24px;width:28px;animation:glide 66s linear infinite -44s}
+  .bird .wings{transform-origin:center;animation:flap 1.9s ease-in-out infinite}
+
+  .frond{transform-origin:left center;animation:sway 9s ease-in-out infinite alternate}
+  .frond:nth-child(2n){animation-duration:12s;animation-delay:-3s}
+  .frond:nth-child(3n){animation-duration:7.5s;animation-delay:-5s}
+  .canopy{transform-origin:50% 100%;animation:sway 14s ease-in-out infinite alternate}
+  .deer-head{transform-origin:22% 82%;animation:graze 11s ease-in-out infinite}
+  @keyframes graze{
+    0%,44%{transform:rotate(0deg)}
+    56%,84%{transform:rotate(15deg)}
+    100%{transform:rotate(0deg)}
+  }
+
+  @media (max-width:860px){
+    .flora.deer,.flora.tree{opacity:.07}
+    .flora.fern,.flora.fern2{display:none}
+  }
+
 </style>
 </head>
 <body>
 
+<div class="altrail" id="altrail" aria-hidden="true">
+  <div class="track"></div>
+  <div class="tick t-top"></div>
+  <div class="tick t-bot"></div>
+  <div class="dot" id="altdot"><span class="val" id="altval">2150 m</span></div>
+</div>
+
 <header class="top">
-  <div class="wrap">
-    <p class="kicker">Trip proposal · 3–4 October 2026 · 11 going</p>
+  <div class="hero">
+    <div class="scene" aria-hidden="true">
+      <div class="sky"></div>
+
+      <div class="ridge far" data-depth="0.50">
+        <svg viewBox="0 0 1200 210" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,170 L90,128 L170,158 L260,92 L340,142 L430,82 L520,132 L610,66 L700,122 L800,94 L890,140 L980,102 L1080,150 L1200,118 L1200,210 L0,210 Z" fill="#3B5849"/>
+        </svg>
+      </div>
+      <div class="mist m1"></div>
+
+      <div class="ridge mid" data-depth="0.30">
+        <svg viewBox="0 0 1200 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,140 L80,112 L160,134 L250,86 L330,120 L420,74 L500,114 L590,62 L680,110 L780,80 L870,126 L960,96 L1060,130 L1200,104 L1200,160 L0,160 Z" fill="#274236"/>
+        </svg>
+      </div>
+      <div class="mist m2"></div>
+
+      <div class="ridge near" data-depth="0.12">
+        <svg viewBox="0 0 1200 104" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,88 L120,70 L240,82 L360,58 L480,76 L600,48 L720,72 L840,54 L960,78 L1080,62 L1200,80 L1200,104 L0,104 Z" fill="#16261F"/>
+        </svg>
+      </div>
+      <div class="mist m3"></div>
+
+      <span class="puff p1"></span><span class="puff p2"></span>
+      <span class="puff p3"></span><span class="puff p4"></span>
+    </div>
+
+    <div class="wrap heroshift">
     <h1>Kirigalpotta
       <span class="sub">Overnight up from Colombo, the second-highest peak in the country at first light, then a night under canvas at Ohiya.</span>
     </h1>
@@ -271,6 +440,7 @@
         </g>
       </svg>
     </div>
+    </div>
   </div>
 
   <dl class="facts">
@@ -289,7 +459,25 @@
 <div class="wrap">
 
   <!-- ===================== CONSOLE ===================== -->
-  <section id="budget">
+  <section id="budget" class="reveal">
+    <div class="flora fern" data-depth="0.10" aria-hidden="true">
+      <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" fill="none" stroke-linecap="round">
+          <path d="M100,240 C98,200 100,170 102,140" stroke-width="7"/>
+          <g stroke-width="3">
+            <path class="frond" d="M102,142 C74,128 46,124 16,132 M102,142 C80,118 58,106 32,102"/>
+            <path class="frond" d="M102,142 C130,126 160,122 188,130 M102,142 C126,116 150,104 176,100"/>
+            <path class="frond" d="M102,150 C76,152 50,162 28,180 M102,158 C128,160 154,170 176,188"/>
+            <path class="frond" d="M102,136 C92,106 88,76 96,48 M102,136 C114,108 122,80 118,52"/>
+          </g>
+          <g stroke-width="1.6" opacity=".8">
+            <path d="M84,133 L80,124 M66,129 L62,120 M48,127 L44,118"/>
+            <path d="M120,133 L124,124 M138,129 L142,120 M156,127 L160,118"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
     <div class="sec-head">
       <h2>What it costs</h2>
       <span class="tag">Change any figure — the totals follow</span>
@@ -349,7 +537,36 @@
   </section>
 
   <!-- ===================== TRANSPORT DECISION ===================== -->
-  <section id="transport">
+  <section id="transport" class="reveal">
+    <div class="flora tree" data-depth="0.07" aria-hidden="true">
+      <svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg">
+        <g class="canopy" fill="currentColor" opacity=".55">
+          <ellipse cx="118" cy="74" rx="66" ry="42"/>
+          <ellipse cx="68" cy="94" rx="42" ry="28"/>
+          <ellipse cx="172" cy="92" rx="46" ry="30"/>
+          <ellipse cx="124" cy="46" rx="40" ry="26"/>
+        </g>
+        <g stroke="currentColor" fill="none" stroke-linecap="round">
+          <path d="M116,260 C110,216 104,186 112,152 C118,128 108,110 102,96" stroke-width="12"/>
+          <path d="M110,150 C90,140 74,124 66,104" stroke-width="7"/>
+          <path d="M113,132 C134,124 152,110 164,92" stroke-width="7"/>
+          <path d="M107,176 C88,172 74,162 64,148" stroke-width="5"/>
+          <path d="M112,190 C132,186 148,176 158,164" stroke-width="5"/>
+          <g stroke-width="2.2" opacity=".7">
+            <path d="M74,110 C70,122 68,132 70,142 M92,102 C90,116 92,126 96,136"/>
+            <path d="M152,100 C154,114 152,124 148,134 M168,104 C170,116 168,128 164,136"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="bird b1" aria-hidden="true">
+      <svg viewBox="0 0 40 14" xmlns="http://www.w3.org/2000/svg">
+        <g class="wings" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round">
+          <path d="M2,10 C8,1 14,1 20,9 C26,1 32,1 38,10"/>
+        </g>
+      </svg>
+    </div>
+
     <div class="sec-head">
       <h2>Van or coach?</h2>
       <span class="tag">Van, clearly</span>
@@ -415,14 +632,44 @@
   </section>
 
   <!-- ===================== PLAN ===================== -->
-  <section id="plan">
+  <section id="plan" class="reveal">
+    <div class="flora deer" data-depth="0.09" aria-hidden="true">
+      <svg viewBox="0 0 210 170" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" fill="none" stroke-width="6" stroke-linecap="round">
+          <path d="M138,100 L141,132 L136,150"/>
+          <path d="M126,101 L123,131 L128,148"/>
+          <path d="M70,100 L65,130 L70,149"/>
+          <path d="M83,101 L86,133 L80,147"/>
+        </g>
+        <path fill="currentColor" d="M52,78 C52,63 71,57 97,57 C125,57 147,61 153,72 C157,81 154,95 142,99 C120,105 76,105 62,99 C54,95 50,86 52,78 Z"/>
+        <path fill="currentColor" d="M52,76 C44,79 41,88 44,96 C45,99 49,99 49,95 C47,88 49,82 55,79 Z"/>
+        <g class="deer-head">
+          <path fill="currentColor" d="M140,74 C148,63 155,49 159,36 L173,39 C170,54 165,68 154,80 Z"/>
+          <path fill="currentColor" d="M157,40 C157,31 163,25 172,25 C181,25 197,28 200,34 C201,38 195,42 187,42 L169,44 C162,44 157,44 157,40 Z"/>
+          <g stroke="currentColor" fill="none" stroke-width="4" stroke-linecap="round">
+            <path d="M167,26 C164,15 158,8 151,3"/>
+            <path d="M176,26 C178,13 184,6 193,1"/>
+            <path d="M163,17 L153,14"/><path d="M180,13 L189,9"/>
+            <path d="M161,11 L154,7"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="bird b2" aria-hidden="true">
+      <svg viewBox="0 0 40 14" xmlns="http://www.w3.org/2000/svg">
+        <g class="wings" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round">
+          <path d="M2,10 C8,1 14,1 20,9 C26,1 32,1 38,10"/>
+        </g>
+      </svg>
+    </div>
+
     <div class="sec-head">
       <h2>Friday night to Sunday</h2>
       <span class="tag">The hike lands on Saturday morning</span>
     </div>
     <p class="lede">Driving through the night puts you at the gate for the 6 am opening with the whole day in hand, which is what Kirigalpotta needs — 14 km return, six to seven hours, and mist that closes in by mid-morning in October. The cost is that nobody will have slept properly before a hard hike. Plan the van seats for sleeping and keep Friday night quiet.</p>
 
-    <div class="day">
+    <div class="day reveal">
       <h3>Friday 2 October — the overnight run</h3>
       <div class="stop"><time>9:30 pm</time><p>Eat before you leave<span class="det">Proper dinner in Colombo. Nothing on this route is open at 2 am.</span></p></div>
       <div class="stop"><time>10:30 pm</time><p>Van leaves Colombo<span class="det">Pick-ups along the Kottawa–Nugegoda side, then Ratnapura, Balangoda, Beragala, Haputale. Roughly six hours with a stop.</span></p></div>
@@ -430,7 +677,7 @@
       <div class="stop"><time>4:30 am</time><p>Reach Ohiya<span class="det">The site is yours from Saturday evening, not now, so tents and cooking kit stay in the van and ride up to the gate with you. No problem — the van is parked there all day anyway.</span></p></div>
     </div>
 
-    <div class="day">
+    <div class="day reveal">
       <h3>Saturday 3 October — the summit</h3>
       <div class="stop"><time>5:15 am</time><p>Drive Ohiya to the park gate<span class="det">About 11 km of steep, narrow road. Allow 30 minutes, more in mist.</span></p></div>
       <div class="stop"><time>6:00 am</time><p>Gate opens — tickets, bag check, meet the tracker<span class="det">Bags are searched for polythene here. Sort your packaging on Friday, not in the queue at dawn.</span></p></div>
@@ -441,7 +688,7 @@
       <div class="stop"><time>6:30 pm</time><p>Noodles, fire, beer<span class="det">Temperatures drop into single digits after dark at 1,800 m. Everyone needs a warm layer, not just a jacket.</span></p></div>
     </div>
 
-    <div class="day">
+    <div class="day reveal">
       <h3>Sunday 4 October — home</h3>
       <div class="stop"><time>7:30 am</time><p>Breakfast at camp, pack up<span class="det">Checkout is Sunday afternoon, so there is no rush. Wet tents weigh more — give packing an hour longer than you think.</span></p></div>
       <div class="stop"><time>9:30 am</time><p>Leave Ohiya<span class="det">One optional stop on the way — Bambarakanda falls or Lipton's Seat are both close to the route and cost nothing. Going back into the park for World's End means a second entry ticket for everyone, so it is not worth it.</span></p></div>
@@ -451,49 +698,120 @@
   </section>
 
   <!-- ===================== FLAGS ===================== -->
-  <section id="flags">
+  <section id="flags" class="reveal">
+    <div class="flora treeline" data-depth="0.05" aria-hidden="true">
+      <svg viewBox="0 0 1200 130" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <g fill="currentColor" opacity=".7">
+          <ellipse cx="70" cy="66" rx="46" ry="28"/><ellipse cx="150" cy="78" rx="34" ry="22"/>
+          <ellipse cx="280" cy="58" rx="52" ry="32"/><ellipse cx="360" cy="76" rx="36" ry="22"/>
+          <ellipse cx="500" cy="68" rx="44" ry="26"/><ellipse cx="590" cy="82" rx="32" ry="20"/>
+          <ellipse cx="720" cy="56" rx="50" ry="30"/><ellipse cx="808" cy="76" rx="36" ry="22"/>
+          <ellipse cx="940" cy="66" rx="46" ry="28"/><ellipse cx="1030" cy="80" rx="32" ry="20"/>
+          <ellipse cx="1140" cy="62" rx="48" ry="28"/>
+        </g>
+        <g stroke="currentColor" stroke-width="9" stroke-linecap="round">
+          <path d="M70,130 L70,72"/><path d="M150,130 L150,84"/><path d="M280,130 L280,64"/>
+          <path d="M360,130 L360,82"/><path d="M500,130 L500,72"/><path d="M590,130 L590,86"/>
+          <path d="M720,130 L720,62"/><path d="M808,130 L808,82"/><path d="M940,130 L940,72"/>
+          <path d="M1030,130 L1030,84"/><path d="M1140,130 L1140,68"/>
+        </g>
+      </svg>
+    </div>
+    <div class="flora fern2" data-depth="0.12" aria-hidden="true">
+      <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" fill="none" stroke-linecap="round">
+          <path d="M100,240 C98,200 100,170 102,140" stroke-width="7"/>
+          <g stroke-width="3">
+            <path class="frond" d="M102,142 C74,128 46,124 16,132 M102,142 C80,118 58,106 32,102"/>
+            <path class="frond" d="M102,142 C130,126 160,122 188,130 M102,142 C126,116 150,104 176,100"/>
+            <path class="frond" d="M102,150 C76,152 50,162 28,180 M102,158 C128,160 154,170 176,188"/>
+            <path class="frond" d="M102,136 C92,106 88,76 96,48 M102,136 C114,108 122,80 118,52"/>
+          </g>
+          <g stroke-width="1.6" opacity=".8">
+            <path d="M84,133 L80,124 M66,129 L62,120 M48,127 L44,118"/>
+            <path d="M120,133 L124,124 M138,129 L142,120 M156,127 L160,118"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="bird b3" aria-hidden="true">
+      <svg viewBox="0 0 40 14" xmlns="http://www.w3.org/2000/svg">
+        <g class="wings" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round">
+          <path d="M2,10 C8,1 14,1 20,9 C26,1 32,1 38,10"/>
+        </g>
+      </svg>
+    </div>
+
     <div class="sec-head">
       <h2>Before you collect money</h2>
       <span class="tag">Seven things to settle</span>
     </div>
 
     <div class="flags">
-      <div class="flag hot">
+      <div class="flag hot reveal d1">
         <h4>Does Rs 9,400 buy the site or eight beds?</h4>
         <p>The site is booked and yours from Saturday evening. The only thing left to confirm is whether that figure covers the pitch regardless of headcount, or eight sleeping spots with three people unaccounted for. Ask the operator for the tent count in writing, then zero out the top-up line or leave it in.</p>
       </div>
-      <div class="flag hot">
+      <div class="flag hot reveal d1">
         <h4>No polythene past the gate</h4>
         <p>Horton Plains is a strict plastic-free zone and bags are checked on the way in. Decant water into reusable bottles, repack noodles and snacks into tins or cloth bags, and carry every wrapper back out — there are no bins on the trail.</p>
       </div>
-      <div class="flag hot">
+      <div class="flag hot reveal d1">
         <h4>Beer stays at the camp</h4>
         <p>Alcohol and smoking are banned inside the park, with spot fines and removal for anyone caught. The drinks budget is for the Ohiya campsite on night one only.</p>
       </div>
-      <div class="flag">
+      <div class="flag reveal d2">
         <h4>Take a tracker for Kirigalpotta</h4>
         <p>There is no separate permit — the park ticket covers the trail. But it is unmarked, groups do get lost on the way down, and eleven people spread across a bog is exactly how that happens. Budget for a park tracker or guide.</p>
       </div>
-      <div class="flag hot">
+      <div class="flag hot reveal d1">
         <h4>October is the wet half of the year</h4>
         <p>The clear season at Horton Plains is January to March. Early October sits in the second inter-monsoon: showers, mist by mid-morning, slippery rock and leeches on the Kirigalpotta trail. Pack rain gear and leech socks as standard, not as optional, and accept that the summit view is a coin toss.</p>
       </div>
-      <div class="flag hot">
+      <div class="flag hot reveal d1">
         <h4>Nobody will have slept</h4>
         <p>A six-hour overnight drive followed straight by a seven-hour hike is the real risk in this plan. Eat properly on Friday evening, keep the van quiet after Balangoda, and set the 10 am turnaround so a tired group is not still descending in afternoon mist.</p>
       </div>
-      <div class="flag">
+      <div class="flag reveal d2">
         <h4>Book the van this week</h4>
         <p>The 3rd and 4th are a Saturday and Sunday, three weeks out. Good KDH owners are taken early for weekends, and you need one who will do a 10:30 pm departure without inflating the night surcharge.</p>
       </div>
-      <div class="flag">
+      <div class="flag reveal d2">
         <h4>Everything rides in the van on Saturday</h4>
         <p>Because the site opens Saturday evening, tents and cooking kit spend the whole hiking day in the van at the park gate. Pack so that what you need on the trail is in daypacks and nothing valuable is left loose in the vehicle.</p>
       </div>
     </div>
   </section>
 
-  <div class="footnote">
+  <div class="patana-band reveal" aria-hidden="true">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#42654F" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".55">
+        <path class="blade" d="M30,120 C36,84 26,58 40,30"/>
+        <path class="blade" d="M78,120 C84,90 74,62 92,38"/>
+        <path class="blade" d="M132,120 C126,86 138,60 124,26"/>
+        <path class="blade" d="M186,120 C194,92 182,64 200,44"/>
+        <path class="blade" d="M240,120 C234,88 246,58 232,34"/>
+        <path class="blade" d="M298,120 C306,86 294,60 312,32"/>
+        <path class="blade" d="M352,120 C346,90 358,62 344,40"/>
+        <path class="blade" d="M410,120 C418,84 406,56 424,28"/>
+        <path class="blade" d="M466,120 C460,92 472,64 458,42"/>
+        <path class="blade" d="M522,120 C530,88 518,58 536,30"/>
+        <path class="blade" d="M578,120 C572,86 584,60 570,36"/>
+        <path class="blade" d="M634,120 C642,90 630,62 648,38"/>
+        <path class="blade" d="M690,120 C684,88 696,58 682,32"/>
+        <path class="blade" d="M746,120 C754,84 742,56 760,26"/>
+        <path class="blade" d="M802,120 C796,92 808,64 794,44"/>
+        <path class="blade" d="M858,120 C866,88 854,58 872,34"/>
+        <path class="blade" d="M914,120 C908,86 920,60 906,30"/>
+        <path class="blade" d="M970,120 C978,90 966,62 984,40"/>
+        <path class="blade" d="M1026,120 C1020,88 1032,58 1018,28"/>
+        <path class="blade" d="M1082,120 C1090,86 1078,60 1096,36"/>
+        <path class="blade" d="M1140,120 C1134,92 1146,64 1132,42"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="footnote reveal">
     <p>Figures are planning estimates built from published rates in mid-2026: Horton Plains local adult entry at Rs 150 before service charge and VAT, local KDH hire at Rs 100–150 per km, auto diesel at Rs 407 a litre, and luxury coach fares of about Rs 2,200–2,400 for Colombo to the Haputale–Bandarawela stretch. Park fees and fuel both move without much notice, so treat the totals as a budget to work against rather than a quote.</p>
   </div>
 </div>
@@ -717,6 +1035,83 @@
   d.addEventListener("blur",  function(){ if (!d.value.trim()) d.value = "3 / 4 October"; });
 
   recalc();
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* --- scroll reveals --- */
+  var targets = document.querySelectorAll(".reveal");
+  if (calm || !("IntersectionObserver" in window)){
+    Array.prototype.forEach.call(targets, function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
+    Array.prototype.forEach.call(targets, function(el){ io.observe(el); });
+  }
+
+  /* --- parallax ridges + hero drift + altitude rail --- */
+  var ridges = document.querySelectorAll(".ridge");
+  var flora  = document.querySelectorAll(".flora");
+  var mists  = document.querySelectorAll(".mist");
+  var heroEl = document.querySelector(".heroshift");
+  var rail   = document.getElementById("altrail");
+  var dot    = document.getElementById("altdot");
+  var val    = document.getElementById("altval");
+
+  var BASE = 2150, SUMMIT = 2388;
+  var ticking = false;
+
+  function frame(){
+    ticking = false;
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (!calm){
+      Array.prototype.forEach.call(ridges, function(r){
+        var d = parseFloat(r.getAttribute("data-depth")) || 0;
+        r.style.transform = "translate3d(0," + (y * d).toFixed(1) + "px,0)";
+      });
+      Array.prototype.forEach.call(mists, function(m, i){
+        m.style.marginBottom = (-y * (0.18 + i * 0.07)).toFixed(1) + "px";
+      });
+      if (heroEl){
+        heroEl.style.transform = "translate3d(0," + (y * -0.14).toFixed(1) + "px,0)";
+        heroEl.style.opacity = Math.max(0, 1 - y / 620);
+      }
+
+      var mid = window.innerHeight / 2;
+      Array.prototype.forEach.call(flora, function(f){
+        var r = f.getBoundingClientRect();
+        if (r.bottom < -400 || r.top > window.innerHeight + 400) return;
+        var d = parseFloat(f.getAttribute("data-depth")) || 0;
+        var off = (r.top + r.height / 2) - mid;
+        f.style.transform = "translate3d(0," + (-off * d).toFixed(1) + "px,0)";
+      });
+    }
+
+    var doc = document.documentElement;
+    var span = (doc.scrollHeight - window.innerHeight) || 1;
+    var p = Math.min(1, Math.max(0, y / span));
+
+    if (dot && rail){
+      dot.style.bottom = (p * Math.max(0, rail.clientHeight - 16)).toFixed(1) + "px";
+      val.textContent = Math.round(BASE + p * (SUMMIT - BASE)).toLocaleString("en-US") + " m";
+    }
+    if (rail) rail.classList.toggle("on", y > 260);
+  }
+
+  function onScroll(){
+    if (!ticking){ ticking = true; window.requestAnimationFrame(frame); }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  frame();
 })();
 </script>
 </body>
