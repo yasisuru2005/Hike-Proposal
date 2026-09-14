@@ -131,6 +131,7 @@
   .headline-cost .total{display:block;font-size:14px;color:var(--patana-soft);margin-top:4px;font-family:var(--display)}
 
   /* ---------- ledger ---------- */
+  .table-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
   .ledger{width:100%;border-collapse:collapse;margin-top:10px}
   .ledger caption{
     text-align:left;font-family:var(--display);font-weight:600;font-size:15px;
@@ -210,12 +211,22 @@
   @media (max-width:760px){
     body{font-size:16px}
     .wrap{padding:0 18px 72px}
-    .console{grid-template-columns:1fr;gap:20px}
+    .console{grid-template-columns:1fr;gap:20px;padding:18px}
+    .controls{gap:16px 22px}
     .headline-cost{text-align:left}
+    .headline-cost .num{font-size:clamp(32px,10vw,44px)}
     .compare{grid-template-columns:1fr}
+    .ledger{min-width:520px}
     .ledger td:first-child{width:auto}
+    .ledger th,.ledger td{padding:9px 8px}
+    .ledger th:first-child,.ledger td:first-child{padding-left:0}
+    .ledger input.rate{width:74px;font-size:14.5px;padding:5px 6px}
     .stop{grid-template-columns:70px 1fr;gap:12px}
     .fact{border-right:0;border-bottom:1px solid rgba(255,255,255,.14)}
+  }
+  @media (max-width:420px){
+    .ctl input[type=number]{width:88px}
+    .headline-cost .total{font-size:13px}
   }
   @media print{
     .console{background:#fff;color:#000;border:1px solid #000}
@@ -524,26 +535,32 @@
       </div>
     </div>
 
+    <div class="table-scroll">
     <table class="ledger" id="tblTransport">
       <caption>Transportation</caption>
       <thead><tr><th>Line</th><th>Basis</th><th>Rate</th><th>Amount</th></tr></thead>
       <tbody></tbody>
       <tfoot><tr><td>Transportation subtotal</td><td></td><td></td><td id="subTransport"></td></tr></tfoot>
     </table>
+    </div>
 
+    <div class="table-scroll">
     <table class="ledger" id="tblFood">
       <caption>Food &amp; refreshments</caption>
       <thead><tr><th>Line</th><th>Basis</th><th>Rate</th><th>Amount</th></tr></thead>
       <tbody></tbody>
       <tfoot><tr><td>Food subtotal</td><td></td><td></td><td id="subFood"></td></tr></tfoot>
     </table>
+    </div>
 
+    <div class="table-scroll">
     <table class="ledger" id="tblTrail">
       <caption>Trail &amp; activity</caption>
       <thead><tr><th>Line</th><th>Basis</th><th>Rate</th><th>Amount</th></tr></thead>
       <tbody></tbody>
       <tfoot><tr><td>Trail subtotal</td><td></td><td></td><td id="subTrail"></td></tr></tfoot>
     </table>
+    </div>
 
     <div class="actions">
       <button class="btn primary" type="button" id="printBtn">Save as PDF</button>
