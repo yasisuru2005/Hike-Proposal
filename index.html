@@ -81,6 +81,7 @@
     display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
     background:var(--ink);color:var(--paper);
     border-top:1px solid rgba(255,255,255,.14);
+    flex:none;
   }
   .fact{padding:18px 20px;border-right:1px solid rgba(255,255,255,.14)}
   .fact:last-child{border-right:0}
@@ -224,17 +225,21 @@
     .reveal{opacity:1!important;transform:none!important}
     .heroshift{transform:none!important;opacity:1!important}
   }  /* ---------- parallax nature scene ---------- */
-  header.top{position:relative;overflow:hidden}
+  header.top{
+    position:relative;overflow:hidden;
+    display:flex;flex-direction:column;
+    min-height:100vh;min-height:100svh;
+  }
   .hero{
     position:relative;
     display:flex;
     align-items:center;
-    min-height:calc(100vh - 129px);
-    min-height:calc(100svh - 129px);
+    flex:1 1 auto;
+    min-height:0;
     padding:56px 0 48px;
   }
   @media (max-width:640px){
-    .hero{min-height:calc(100vh - 229px);min-height:calc(100svh - 229px);padding:80px 0 36px}
+    .hero{padding:80px 0 36px}
   }
   .scene{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
   .scene .sky{
