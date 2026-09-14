@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kirigalpotta — hike proposal for 11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16261F;
+    --moss:#2E4A3C;
+    --fern:#42654F;
+    --patana:#C08A2E;
+    --patana-soft:#E8D2A3;
+    --mist:#DCE5E1;
+    --paper:#F3F5F1;
+    --paper-2:#EAEEE8;
+    --slate:#5E7275;
+    --dawn:#6E9AAE;
+    --rule:rgba(22,38,31,.14);
+    --rule-strong:rgba(22,38,31,.32);
+    --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.62;
+    font-variant-numeric:tabular-nums;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px 96px}
+
+  h1,h2,h3,h4,.num,button,input,select,label,th{font-family:var(--display)}
+  h2{font-size:clamp(24px,3.4vw,34px);line-height:1.1;font-weight:600;letter-spacing:-.02em;margin:0 0 6px}
+  h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:0 0 4px}
+  p{margin:0 0 14px;max-width:68ch}
+  a{color:var(--moss)}
+
+  /* ---------- masthead ---------- */
+  header.top{
+    background:var(--ink);
+    color:var(--paper);
+    padding:38px 0 0;
+    border-bottom:6px solid var(--patana);
+  }
+  .top .wrap{padding-bottom:0}
+  .kicker{
+    font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.04em;
+    color:var(--patana-soft);margin:0 0 14px;
+  }
+  h1{
+    font-size:clamp(44px,10.5vw,116px);
+    line-height:.86;
+    font-weight:800;
+    letter-spacing:-.045em;
+    margin:0;
+    color:var(--paper);
+  }
+  h1 .sub{
+    display:block;font-size:clamp(15px,2.2vw,22px);font-weight:400;letter-spacing:-.01em;
+    color:var(--mist);margin-top:16px;line-height:1.35;max-width:32ch;
+  }
+
+  /* ---------- elevation hero ---------- */
+  .profile{margin:26px 0 0;position:relative}
+  .profile svg{display:block;width:100%;height:auto}
+  .draw{
+    stroke-dasharray:2400;stroke-dashoffset:2400;
+    animation:draw 2.1s cubic-bezier(.5,.05,.2,1) .25s forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @media (prefers-reduced-motion:reduce){
+    .draw{animation:none;stroke-dashoffset:0}
+  }
+
+  /* ---------- facts strip ---------- */
+  .facts{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    background:var(--ink);color:var(--paper);
+    border-top:1px solid rgba(255,255,255,.14);
+  }
+  .fact{padding:18px 20px;border-right:1px solid rgba(255,255,255,.14)}
+  .fact:last-child{border-right:0}
+  .fact dt{font-family:var(--display);font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--patana-soft);margin:0 0 3px}
+  .fact dd{margin:0;font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:-.01em}
+  .fact input{
+    font:inherit;font-size:19px;font-weight:600;background:transparent;color:var(--paper);
+    border:0;padding:0 0 2px;width:100%;
+  }
+  .fact input:focus{outline:2px solid var(--patana);outline-offset:3px}
+
+  /* ---------- sections ---------- */
+  section{padding-top:56px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .sec-head .tag{
+    font-family:var(--display);font-size:12px;font-weight:600;letter-spacing:.04em;
+    color:var(--moss);background:var(--patana-soft);padding:4px 9px;border-radius:3px;white-space:nowrap;
+  }
+  .lede{color:var(--slate);font-size:16.5px}
+
+  /* ---------- control bar ---------- */
+  .console{
+    background:var(--moss);color:var(--paper);border-radius:10px;padding:22px 24px;
+    display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:center;margin-top:26px;
+  }
+  .controls{display:flex;flex-wrap:wrap;gap:18px 26px}
+  .ctl{display:flex;flex-direction:column;gap:6px}
+  .ctl label{font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--patana-soft)}
+  .ctl input[type=number]{
+    font-family:var(--display);font-size:20px;font-weight:600;width:106px;
+    background:rgba(255,255,255,.07);color:var(--paper);
+    border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:7px 10px;
+  }
+  .ctl input:focus,.seg button:focus-visible{outline:2px solid var(--patana);outline-offset:2px}
+  .seg{display:inline-flex;background:rgba(255,255,255,.09);border-radius:7px;padding:3px;gap:3px}
+  .seg button{
+    font-size:14px;font-weight:600;color:var(--mist);background:transparent;border:0;
+    padding:8px 14px;border-radius:5px;cursor:pointer;
+  }
+  .seg button[aria-pressed=true]{background:var(--patana);color:#231a06}
+
+  .headline-cost{text-align:right}
+  .headline-cost .num{
+    display:block;font-size:clamp(40px,6.6vw,62px);font-weight:800;letter-spacing:-.04em;line-height:1;
+  }
+  .headline-cost .cap{display:block;font-size:13.5px;color:var(--mist);margin-top:8px;font-family:var(--display)}
+  .headline-cost .total{display:block;font-size:14px;color:var(--patana-soft);margin-top:4px;font-family:var(--display)}
+
+  /* ---------- ledger ---------- */
+  .ledger{width:100%;border-collapse:collapse;margin-top:10px}
+  .ledger caption{
+    text-align:left;font-family:var(--display);font-weight:600;font-size:15px;
+    padding:16px 0 8px;color:var(--moss);
+  }
+  .ledger th{
+    font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--slate);text-align:right;
+    padding:0 10px 8px;border-bottom:1px solid var(--rule-strong);
+  }
+  .ledger th:first-child{text-align:left;padding-left:0}
+  .ledger td{padding:11px 10px;border-bottom:1px solid var(--rule);vertical-align:top;text-align:right}
+  .ledger td:first-child{text-align:left;padding-left:0;width:52%}
+  .ledger tbody tr:hover{background:var(--paper-2)}
+  .item{font-weight:500}
+  .hint{display:block;font-size:14px;color:var(--slate);line-height:1.4;margin-top:2px}
+  .basis{font-size:13.5px;color:var(--slate);white-space:nowrap}
+  .amt{font-family:var(--display);font-weight:600;font-size:16px;white-space:nowrap}
+  .ledger input.rate{
+    font-family:var(--display);font-size:15.5px;font-weight:500;width:92px;text-align:right;
+    border:1px solid var(--rule-strong);border-radius:5px;padding:5px 8px;
+    background:#fff;color:var(--ink);
+  }
+  .ledger input.rate:focus{outline:2px solid var(--patana);outline-offset:1px}
+  tfoot td{
+    border-bottom:0;border-top:2px solid var(--ink);padding-top:12px;
+    font-family:var(--display);font-weight:600;font-size:17px;
+  }
+  tfoot td:first-child{text-align:left}
+
+  /* ---------- compare ---------- */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule-strong);border-radius:10px;overflow:hidden;margin-top:22px}
+  .opt{background:var(--paper-2);padding:22px}
+  .opt.win{background:var(--ink);color:var(--paper)}
+  .opt h3{font-size:17px;margin-bottom:2px}
+  .opt .big{font-family:var(--display);font-size:30px;font-weight:800;letter-spacing:-.03em;display:block;margin:10px 0 2px}
+  .opt .per{font-size:14px;color:var(--slate)}
+  .opt.win .per{color:var(--mist)}
+  .opt ul{margin:14px 0 0;padding-left:17px;font-size:15px;line-height:1.5}
+  .opt li{margin-bottom:5px}
+  .verdict{
+    display:inline-block;font-family:var(--display);font-size:11.5px;font-weight:600;letter-spacing:.04em;
+    background:var(--patana);color:#231a06;padding:3px 8px;border-radius:3px;
+  }
+
+  /* ---------- terms box ---------- */
+  .terms{border-left:4px solid var(--patana);background:var(--paper-2);padding:20px 22px;border-radius:0 8px 8px 0;margin-top:24px}
+  .terms dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:15.5px}
+  .terms dt{font-family:var(--display);font-weight:600;white-space:nowrap}
+  .terms dd{margin:0;color:var(--slate)}
+
+  /* ---------- timeline ---------- */
+  .day{margin-top:26px}
+  .day h3{color:var(--moss);border-bottom:2px solid var(--patana-soft);padding-bottom:6px;margin-bottom:0}
+  .stop{display:grid;grid-template-columns:88px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--rule)}
+  .stop time{font-family:var(--display);font-weight:600;font-size:15px;color:var(--patana)}
+  .stop p{margin:0;font-size:16px}
+  .stop .det{display:block;font-size:14.5px;color:var(--slate);line-height:1.45}
+
+  /* ---------- flags ---------- */
+  .flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:22px}
+  .flag{border-top:3px solid var(--moss);padding-top:14px}
+  .flag.hot{border-top-color:#A4472B}
+  .flag h4{font-size:16px;margin:0 0 5px;font-weight:600}
+  .flag p{font-size:15px;color:var(--slate);margin:0}
+
+  .footnote{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:14.5px;color:var(--slate)}
+  .footnote p{max-width:80ch}
+
+  .actions{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .btn{
+    font-family:var(--display);font-size:14.5px;font-weight:600;cursor:pointer;
+    padding:10px 18px;border-radius:6px;border:1px solid var(--ink);background:transparent;color:var(--ink);
+  }
+  .btn.primary{background:var(--ink);color:var(--paper)}
+  .btn:focus-visible{outline:2px solid var(--patana);outline-offset:2px}
+
+  @media (max-width:760px){
+    body{font-size:16px}
+    .wrap{padding:0 18px 72px}
+    .console{grid-template-columns:1fr;gap:20px}
+    .headline-cost{text-align:left}
+    .compare{grid-template-columns:1fr}
+    .ledger td:first-child{width:auto}
+    .stop{grid-template-columns:70px 1fr;gap:12px}
+    .fact{border-right:0;border-bottom:1px solid rgba(255,255,255,.14)}
+  }
+  @media print{
+    .console{background:#fff;color:#000;border:1px solid #000}
+    .seg,.actions{display:none}
+    .opt.win{background:#fff;color:#000;border:2px solid #000}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="kicker">Trip proposal · 3–4 October 2026 · 11 going</p>
+    <h1>Kirigalpotta
+      <span class="sub">Overnight up from Colombo, the second-highest peak in the country at first light, then a night under canvas at Ohiya.</span>
+    </h1>
+
+    <div class="profile" aria-hidden="true">
+      <svg viewBox="0 0 1000 230" xmlns="http://www.w3.org/2000/svg" role="img">
+        <defs>
+          <linearGradient id="under" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#C08A2E" stop-opacity=".34"/>
+            <stop offset="100%" stop-color="#C08A2E" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- contour reference lines -->
+        <g stroke="#DCE5E1" stroke-opacity=".18" stroke-width="1">
+          <line x1="0" y1="60" x2="1000" y2="60"/>
+          <line x1="0" y1="105" x2="1000" y2="105"/>
+          <line x1="0" y1="150" x2="1000" y2="150"/>
+          <line x1="0" y1="195" x2="1000" y2="195"/>
+        </g>
+        <text x="4" y="55" fill="#DCE5E1" fill-opacity=".45" font-family="Bricolage Grotesque, sans-serif" font-size="11">2400 m</text>
+        <text x="4" y="145" fill="#DCE5E1" fill-opacity=".45" font-family="Bricolage Grotesque, sans-serif" font-size="11">2150 m</text>
+        <text x="4" y="190" fill="#DCE5E1" fill-opacity=".45" font-family="Bricolage Grotesque, sans-serif" font-size="11">2025 m</text>
+
+        <path d="M40 150 L110 142 L175 168 L245 160 L320 176 L400 150 L470 162 L545 128 L620 138 L700 100 L775 84 L860 66 L920 62 L920 210 L40 210 Z" fill="url(#under)"/>
+        <path class="draw" d="M40 150 L110 142 L175 168 L245 160 L320 176 L400 150 L470 162 L545 128 L620 138 L700 100 L775 84 L860 66 L920 62"
+              fill="none" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+        <g fill="#F3F5F1" font-family="Bricolage Grotesque, sans-serif">
+          <circle cx="40" cy="150" r="5" fill="#6E9AAE"/>
+          <text x="34" y="182" font-size="13" font-weight="600">Trailhead</text>
+          <text x="34" y="198" font-size="12" fill-opacity=".6">2150 m · 6:30 am</text>
+
+          <circle cx="920" cy="62" r="6.5" fill="#C08A2E"/>
+          <text x="800" y="44" font-size="14" font-weight="600">Summit 2388 m</text>
+          <text x="800" y="27" font-size="12" fill-opacity=".6">14 km return · about 7 hrs</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <dl class="facts">
+    <div class="fact">
+      <dt>Dates</dt>
+      <dd><input id="tripDate" type="text" value="3 / 4 October" aria-label="Trip dates" spellcheck="false"></dd>
+    </div>
+    <div class="fact"><dt>Leaving</dt><dd>Fri night, Colombo</dd></div>
+    <div class="fact"><dt>Hike</dt><dd>Sat 3rd</dd></div>
+    <div class="fact"><dt>Camp</dt><dd>Ohiya, booked</dd></div>
+    <div class="fact"><dt>Group</dt><dd><span id="factPax">11</span> people</dd></div>
+    <div class="fact"><dt>Away</dt><dd>2 nights, 1 on the road</dd></div>
+  </dl>
+</header>
+
+<div class="wrap">
+
+  <!-- ===================== CONSOLE ===================== -->
+  <section id="budget">
+    <div class="sec-head">
+      <h2>What it costs</h2>
+      <span class="tag">Change any figure — the totals follow</span>
+    </div>
+    <p class="lede">Every rate below is a live input. Swap in a real quote the moment you get one and the per-head number updates as you type.</p>
+
+    <div class="console">
+      <div class="controls">
+        <div class="ctl">
+          <label for="pax">People going</label>
+          <input id="pax" type="number" min="1" max="30" step="1" value="11">
+        </div>
+        <div class="ctl">
+          <label for="km">Total km, return</label>
+          <input id="km" type="number" min="0" step="10" value="450">
+        </div>
+        <div class="ctl">
+          <label>Getting there</label>
+          <div class="seg" role="group" aria-label="Transport option">
+            <button type="button" id="modeVan" aria-pressed="true">Hired van</button>
+            <button type="button" id="modeBus" aria-pressed="false">NCG coach</button>
+          </div>
+        </div>
+      </div>
+      <div class="headline-cost">
+        <span class="num" id="perHead">Rs 12,741</span>
+        <span class="cap">per person, all in</span>
+        <span class="total">Trip total <span id="grand">Rs 140,150</span> · collect <span id="collect">Rs 14,000</span> each</span>
+      </div>
+    </div>
+
+    <table class="ledger" id="tblTransport">
+      <caption>Transportation</caption>
+      <thead><tr><th>Line</th><th>Basis</th><th>Rate</th><th>Amount</th></tr></thead>
+      <tbody></tbody>
+      <tfoot><tr><td>Transportation subtotal</td><td></td><td></td><td id="subTransport"></td></tr></tfoot>
+    </table>
+
+    <table class="ledger" id="tblFood">
+      <caption>Food &amp; refreshments</caption>
+      <thead><tr><th>Line</th><th>Basis</th><th>Rate</th><th>Amount</th></tr></thead>
+      <tbody></tbody>
+      <tfoot><tr><td>Food subtotal</td><td></td><td></td><td id="subFood"></td></tr></tfoot>
+    </table>
+
+    <table class="ledger" id="tblTrail">
+      <caption>Trail &amp; activity</caption>
+      <thead><tr><th>Line</th><th>Basis</th><th>Rate</th><th>Amount</th></tr></thead>
+      <tbody></tbody>
+      <tfoot><tr><td>Trail subtotal</td><td></td><td></td><td id="subTrail"></td></tr></tfoot>
+    </table>
+
+    <div class="actions">
+      <button class="btn primary" type="button" id="printBtn">Save as PDF</button>
+      <button class="btn" type="button" id="resetBtn">Reset the numbers</button>
+    </div>
+  </section>
+
+  <!-- ===================== TRANSPORT DECISION ===================== -->
+  <section id="transport">
+    <div class="sec-head">
+      <h2>Van or coach?</h2>
+      <span class="tag">Van, clearly</span>
+    </div>
+    <p class="lede">The coach fare alone looks cheap. The problem is the last 30 km: Ohiya is not on the NCG route, and a Friday night coach drops you at Haputale in the small hours with eleven people, camping gear, and no way to reach a gate that opens at 6 am.</p>
+
+    <div class="compare">
+      <div class="opt win">
+        <span class="verdict">Recommended</span>
+        <h3>One 14-seat KDH van, Friday night to Sunday</h3>
+        <span class="big" id="cmpVan">Rs 63,250</span>
+        <span class="per" id="cmpVanPer">Rs 5,750 each</span>
+        <ul>
+          <li>Leave when you want on Friday night, no fixed departure</li>
+          <li>Sleep on the way and wake at the gate</li>
+          <li>Carries tents, cooking kit and the water cans</li>
+          <li>Stays with you Saturday for the Ohiya–gate runs</li>
+        </ul>
+      </div>
+      <div class="opt">
+        <h3>NCG coach plus local transfers</h3>
+        <span class="big" id="cmpBus">Rs 86,150</span>
+        <span class="per" id="cmpBusPer">Rs 7,832 each</span>
+        <ul>
+          <li>Drops at Haputale — still 19 km short of Ohiya</li>
+          <li>Two hired transfers plus jeeps to the park gate</li>
+          <li>Arrives around 3–4 am with nowhere to wait</li>
+          <li>Fixed seats, no room for tents, and dearer in the end</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:34px">What to pin down before you pay a deposit</h3>
+    <p>Local van owners quote one of two ways. Get the quote in writing either way, because the difference between them on a 450 km trip is real money.</p>
+
+    <div class="terms">
+      <dl>
+        <dt>Per-kilometre hire</dt>
+        <dd>Rs 100–150 per km for a KDH with driver, fuel included, with a minimum of 100–150 km charged per day whether you drive it or not. Rs 110/km is a fair local rate to aim for.</dd>
+
+        <dt>Day package</dt>
+        <dd>Rs 15,000–25,000 per day, which typically includes 100–150 km. Anything beyond that is billed as excess.</dd>
+
+        <dt>Excess kilometres</dt>
+        <dd>Rs 60–150 per km depending on the operator. Tourist-facing firms bill around USD 0.43, roughly Rs 130. Ask for the number before you sign, not after.</dd>
+
+        <dt>How km are counted</dt>
+        <dd>Most owners count garage to garage, not from your pickup point. On a Colombo–Ohiya round trip that can add 30–50 km. Ask which it is.</dd>
+
+        <dt>Driver allowance</dt>
+        <dd>Rs 2,500–4,000 per night for meals and a place to sleep on Saturday, plus about Rs 1,000 night parking. A night-driving surcharge applies between 8 pm and 5 am, which covers almost the whole Friday run — get it quoted as a figure, not a vague extra.</dd>
+
+        <dt>The three-day minimum</dt>
+        <dd>This hire touches three calendar days, so a 150 km-per-day minimum clause means 450 km billed whether you drive it or not. That happens to match the real distance here, but confirm you are billed on actual kilometres, otherwise a shorter route saves you nothing.</dd>
+
+        <dt>If you use a member's own van</dt>
+        <dd>About 450 km at roughly 10 km per litre, with auto diesel at Rs 407, comes to around Rs 18,300 in fuel. Cheaper on paper, but somebody has to drive up a hill road at 3 am and then not hike.</dd>
+
+        <dt>Park vehicle entry</dt>
+        <dd>Rs 250–1,000 at the Horton Plains gate depending on the vehicle. Budget Rs 750 for a van and carry cash.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===================== PLAN ===================== -->
+  <section id="plan">
+    <div class="sec-head">
+      <h2>Friday night to Sunday</h2>
+      <span class="tag">The hike lands on Saturday morning</span>
+    </div>
+    <p class="lede">Driving through the night puts you at the gate for the 6 am opening with the whole day in hand, which is what Kirigalpotta needs — 14 km return, six to seven hours, and mist that closes in by mid-morning in October. The cost is that nobody will have slept properly before a hard hike. Plan the van seats for sleeping and keep Friday night quiet.</p>
+
+    <div class="day">
+      <h3>Friday 2 October — the overnight run</h3>
+      <div class="stop"><time>9:30 pm</time><p>Eat before you leave<span class="det">Proper dinner in Colombo. Nothing on this route is open at 2 am.</span></p></div>
+      <div class="stop"><time>10:30 pm</time><p>Van leaves Colombo<span class="det">Pick-ups along the Kottawa–Nugegoda side, then Ratnapura, Balangoda, Beragala, Haputale. Roughly six hours with a stop.</span></p></div>
+      <div class="stop"><time>2:00 am</time><p>Tea stop around Balangoda<span class="det">Stretch, and let the driver rest properly — he still has the hill road ahead.</span></p></div>
+      <div class="stop"><time>4:30 am</time><p>Reach Ohiya<span class="det">The site is yours from Saturday evening, not now, so tents and cooking kit stay in the van and ride up to the gate with you. No problem — the van is parked there all day anyway.</span></p></div>
+    </div>
+
+    <div class="day">
+      <h3>Saturday 3 October — the summit</h3>
+      <div class="stop"><time>5:15 am</time><p>Drive Ohiya to the park gate<span class="det">About 11 km of steep, narrow road. Allow 30 minutes, more in mist.</span></p></div>
+      <div class="stop"><time>6:00 am</time><p>Gate opens — tickets, bag check, meet the tracker<span class="det">Bags are searched for polythene here. Sort your packaging on Friday, not in the queue at dawn.</span></p></div>
+      <div class="stop"><time>6:30 am</time><p>Start Kirigalpotta<span class="det">Unmarked in places, crossing bog and slippery rock. Nobody walks alone and nobody turns back alone.</span></p></div>
+      <div class="stop"><time>10:00 am</time><p>Hard turnaround at the summit<span class="det">Whoever is not at the top by then turns around anyway. October mist usually wins by mid-morning.</span></p></div>
+      <div class="stop"><time>1:30 pm</time><p>Back at the trailhead, eat the trail lunch</p></div>
+      <div class="stop"><time>3:00 pm</time><p>Drive down to Ohiya and pitch camp<span class="det">Tents go up in daylight while everyone still has legs. This is the reason not to linger at the park.</span></p></div>
+      <div class="stop"><time>6:30 pm</time><p>Noodles, fire, beer<span class="det">Temperatures drop into single digits after dark at 1,800 m. Everyone needs a warm layer, not just a jacket.</span></p></div>
+    </div>
+
+    <div class="day">
+      <h3>Sunday 4 October — home</h3>
+      <div class="stop"><time>7:30 am</time><p>Breakfast at camp, pack up<span class="det">Checkout is Sunday afternoon, so there is no rush. Wet tents weigh more — give packing an hour longer than you think.</span></p></div>
+      <div class="stop"><time>9:30 am</time><p>Leave Ohiya<span class="det">One optional stop on the way — Bambarakanda falls or Lipton's Seat are both close to the route and cost nothing. Going back into the park for World's End means a second entry ticket for everyone, so it is not worth it.</span></p></div>
+      <div class="stop"><time>1:00 pm</time><p>Lunch on the road</p></div>
+      <div class="stop"><time>4:00 pm</time><p>Back in Colombo<span class="det">Leaving in the morning keeps you clear of the Sunday evening crawl into Avissawella.</span></p></div>
+    </div>
+  </section>
+
+  <!-- ===================== FLAGS ===================== -->
+  <section id="flags">
+    <div class="sec-head">
+      <h2>Before you collect money</h2>
+      <span class="tag">Seven things to settle</span>
+    </div>
+
+    <div class="flags">
+      <div class="flag hot">
+        <h4>Does Rs 9,400 buy the site or eight beds?</h4>
+        <p>The site is booked and yours from Saturday evening. The only thing left to confirm is whether that figure covers the pitch regardless of headcount, or eight sleeping spots with three people unaccounted for. Ask the operator for the tent count in writing, then zero out the top-up line or leave it in.</p>
+      </div>
+      <div class="flag hot">
+        <h4>No polythene past the gate</h4>
+        <p>Horton Plains is a strict plastic-free zone and bags are checked on the way in. Decant water into reusable bottles, repack noodles and snacks into tins or cloth bags, and carry every wrapper back out — there are no bins on the trail.</p>
+      </div>
+      <div class="flag hot">
+        <h4>Beer stays at the camp</h4>
+        <p>Alcohol and smoking are banned inside the park, with spot fines and removal for anyone caught. The drinks budget is for the Ohiya campsite on night one only.</p>
+      </div>
+      <div class="flag">
+        <h4>Take a tracker for Kirigalpotta</h4>
+        <p>There is no separate permit — the park ticket covers the trail. But it is unmarked, groups do get lost on the way down, and eleven people spread across a bog is exactly how that happens. Budget for a park tracker or guide.</p>
+      </div>
+      <div class="flag hot">
+        <h4>October is the wet half of the year</h4>
+        <p>The clear season at Horton Plains is January to March. Early October sits in the second inter-monsoon: showers, mist by mid-morning, slippery rock and leeches on the Kirigalpotta trail. Pack rain gear and leech socks as standard, not as optional, and accept that the summit view is a coin toss.</p>
+      </div>
+      <div class="flag hot">
+        <h4>Nobody will have slept</h4>
+        <p>A six-hour overnight drive followed straight by a seven-hour hike is the real risk in this plan. Eat properly on Friday evening, keep the van quiet after Balangoda, and set the 10 am turnaround so a tired group is not still descending in afternoon mist.</p>
+      </div>
+      <div class="flag">
+        <h4>Book the van this week</h4>
+        <p>The 3rd and 4th are a Saturday and Sunday, three weeks out. Good KDH owners are taken early for weekends, and you need one who will do a 10:30 pm departure without inflating the night surcharge.</p>
+      </div>
+      <div class="flag">
+        <h4>Everything rides in the van on Saturday</h4>
+        <p>Because the site opens Saturday evening, tents and cooking kit spend the whole hiking day in the van at the park gate. Pack so that what you need on the trail is in daypacks and nothing valuable is left loose in the vehicle.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="footnote">
+    <p>Figures are planning estimates built from published rates in mid-2026: Horton Plains local adult entry at Rs 150 before service charge and VAT, local KDH hire at Rs 100–150 per km, auto diesel at Rs 407 a litre, and luxury coach fares of about Rs 2,200–2,400 for Colombo to the Haputale–Bandarawela stretch. Park fees and fuel both move without much notice, so treat the totals as a budget to work against rather than a quote.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var fmt = function(n){ return "Rs " + Math.round(n).toLocaleString("en-US"); };
+
+  var DEFAULTS = {
+    van: [
+      {k:"vanhire", label:"Van hire — 14-seat KDH, Friday night to Sunday",
+       hint:"Rate per km, fuel and driver included. 450 km covers Colombo–Ohiya return plus the two park gate runs.",
+       basis:"per km", rate:110, qty:"km"},
+      {k:"batta", label:"Driver allowance",
+       hint:"Meals, a night out at Ohiya on Saturday, night parking, and the overnight driving surcharge for the Friday run.",
+       basis:"group", rate:6500},
+      {k:"vehperm", label:"Park vehicle permit",
+       hint:"Charged at the Horton Plains gate. Cash only.",
+       basis:"group", rate:750},
+      {k:"parking", label:"Parking and tolls",
+       basis:"group", rate:500},
+      {k:"tcont", label:"Transport contingency",
+       hint:"Excess kilometres, a breakdown, or a change of plan on the road.",
+       basis:"group", rate:6000}
+    ],
+    bus: [
+      {k:"fare1", label:"Coach fare — Colombo to Haputale",
+       hint:"NCG or equivalent luxury service. Book seats ahead for a weekend.",
+       basis:"per head", rate:2200},
+      {k:"fare2", label:"Coach fare — Haputale to Colombo",
+       basis:"per head", rate:2200},
+      {k:"xfer", label:"Haputale ⇄ Ohiya transfers",
+       hint:"Two hired vans each way for 11 people and gear, 19 km of hill road.",
+       basis:"group", rate:18000},
+      {k:"jeep", label:"Ohiya ⇄ park gate",
+       hint:"Jeeps for the pre-dawn run up to the gate and back.",
+       basis:"group", rate:12000},
+      {k:"vehperm2", label:"Park vehicle permit", basis:"group", rate:750},
+      {k:"tcont2", label:"Transport contingency", basis:"group", rate:7000}
+    ],
+    food: [
+      {k:"bfast", label:"Breakfast — Saturday, at the gate",
+       hint:"Packed in Colombo on Friday. Buns, roti, boiled eggs. Nothing is open at 5 am up there.",
+       basis:"per head", rate:350},
+      {k:"lunch", label:"Trail lunch pack — Saturday",
+       hint:"Eaten on the mountain. Bananas, chocolate, something salty.",
+       basis:"per head", rate:500},
+      {k:"water", label:"Drinking water, 4 litres each",
+       hint:"Buy 5-litre cans and decant into reusable bottles before the gate. Nothing to refill from on the trail.",
+       basis:"per head", rate:400},
+      {k:"energy", label:"Energy drinks and electrolytes", basis:"per head", rate:400},
+      {k:"noodles", label:"Noodles and tea at camp — Saturday night",
+       hint:"Two packs each plus tea, coffee and milk powder.", basis:"per head", rate:400},
+      {k:"snacks", label:"Camp snacks — Saturday night",
+       hint:"Papadam, peanuts, chips, something devilled.", basis:"per head", rate:600},
+      {k:"beer", label:"Beer kitty — to be confirmed",
+       hint:"Split across the 8 who are drinking. Campsite only, not inside the park — zero tolerance at the gate.",
+       basis:"drinkers", rate:1000, count:8},
+      {k:"bfast2", label:"Breakfast at camp — Sunday",
+       hint:"Bread, eggs, more noodles. Whatever is left.", basis:"per head", rate:300},
+      {k:"lunch2", label:"Lunch on the road — Sunday",
+       hint:"Rice packet at a kade on the way down.", basis:"per head", rate:600},
+      {k:"gas", label:"Gas, condiments, shared cooking",
+       hint:"Two nights of cooking rather than one.", basis:"group", rate:3000}
+    ],
+    trail: [
+      {k:"entry", label:"Horton Plains entry, local adult",
+       hint:"Rs 150 base plus service charge and VAT. Carry student IDs — students pay Rs 20.",
+       basis:"per head", rate:350},
+      {k:"guide", label:"Kirigalpotta guide or park tracker",
+       hint:"One for the group. The trail is unmarked and groups do get lost.",
+       basis:"group", rate:6000},
+      {k:"camp", label:"Campsite and equipment — booked",
+       hint:"Yours from Saturday evening to Sunday afternoon. Paid.", basis:"group", rate:9400},
+      {k:"camptop", label:"Camping top-up for 3 more",
+       hint:"Only applies if the Rs 9,400 buys 8 sleeping spots rather than the whole site. Zero this out if the site is yours regardless of headcount.",
+       basis:"group", rate:3600},
+      {k:"kit", label:"Extra kit",
+       hint:"Gas canister, headlamps, rain covers, first aid, leech socks.",
+       basis:"group", rate:4000},
+      {k:"permit", label:"Permits",
+       hint:"None needed — the park ticket covers the Kirigalpotta trail.",
+       basis:"group", rate:0}
+    ]
+  };
+
+  var state = { mode:"van", pax:11, km:450, rates:{} };
+
+  function seedRates(){
+    state.rates = {};
+    ["van","bus","food","trail"].forEach(function(g){
+      DEFAULTS[g].forEach(function(it){ state.rates[it.k] = it.rate; });
+    });
+  }
+  seedRates();
+
+  function amountOf(it){
+    var r = state.rates[it.k];
+    if (it.basis === "per km")   return r * state.km;
+    if (it.basis === "per head") return r * state.pax;
+    if (it.basis === "drinkers") return r * it.count;
+    return r;
+  }
+
+  function basisLabel(it){
+    if (it.basis === "per km")   return state.km + " km";
+    if (it.basis === "per head") return state.pax + " people";
+    if (it.basis === "drinkers") return it.count + " people";
+    return "one-off";
+  }
+
+  function renderTable(tableId, items){
+    var tbody = document.querySelector("#" + tableId + " tbody");
+    tbody.innerHTML = "";
+    items.forEach(function(it){
+      var tr = document.createElement("tr");
+
+      var td1 = document.createElement("td");
+      var strong = document.createElement("span");
+      strong.className = "item";
+      strong.textContent = it.label;
+      td1.appendChild(strong);
+      if (it.hint){
+        var h = document.createElement("span");
+        h.className = "hint";
+        h.textContent = it.hint;
+        td1.appendChild(h);
+      }
+
+      var td2 = document.createElement("td");
+      td2.className = "basis";
+      td2.textContent = basisLabel(it);
+
+      var td3 = document.createElement("td");
+      var inp = document.createElement("input");
+      inp.type = "number"; inp.className = "rate"; inp.min = "0"; inp.step = "50";
+      inp.value = state.rates[it.k];
+      inp.setAttribute("aria-label", "Rate for " + it.label);
+      inp.addEventListener("input", function(){
+        var v = parseFloat(inp.value);
+        state.rates[it.k] = isNaN(v) ? 0 : v;
+        recalc();
+      });
+      td3.appendChild(inp);
+
+      var td4 = document.createElement("td");
+      td4.className = "amt";
+      td4.textContent = fmt(amountOf(it));
+
+      tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tr.appendChild(td4);
+      tbody.appendChild(tr);
+    });
+  }
+
+  function sum(items){
+    return items.reduce(function(a,it){ return a + amountOf(it); }, 0);
+  }
+
+  function recalc(){
+    var transportItems = state.mode === "van" ? DEFAULTS.van : DEFAULTS.bus;
+
+    renderTable("tblTransport", transportItems);
+    renderTable("tblFood", DEFAULTS.food);
+    renderTable("tblTrail", DEFAULTS.trail);
+
+    var t = sum(transportItems), f = sum(DEFAULTS.food), r = sum(DEFAULTS.trail);
+    var grand = t + f + r;
+    var per = state.pax > 0 ? grand / state.pax : 0;
+
+    document.getElementById("subTransport").textContent = fmt(t);
+    document.getElementById("subFood").textContent = fmt(f);
+    document.getElementById("subTrail").textContent = fmt(r);
+
+    document.getElementById("grand").textContent = fmt(grand);
+    document.getElementById("perHead").textContent = fmt(per);
+    document.getElementById("collect").textContent = fmt(Math.round(per * 1.1 / 500) * 500);
+    document.getElementById("factPax").textContent = state.pax;
+
+    // side-by-side comparison always shows both, at current rates
+    var vanT = sum(DEFAULTS.van), busT = sum(DEFAULTS.bus);
+    document.getElementById("cmpVan").textContent = fmt(vanT);
+    document.getElementById("cmpBus").textContent = fmt(busT);
+    document.getElementById("cmpVanPer").textContent = fmt(state.pax ? vanT/state.pax : 0) + " each";
+    document.getElementById("cmpBusPer").textContent = fmt(state.pax ? busT/state.pax : 0) + " each";
+  }
+
+  document.getElementById("pax").addEventListener("input", function(e){
+    var v = parseInt(e.target.value, 10);
+    state.pax = (isNaN(v) || v < 1) ? 1 : v;
+    recalc();
+  });
+  document.getElementById("km").addEventListener("input", function(e){
+    var v = parseFloat(e.target.value);
+    state.km = isNaN(v) ? 0 : v;
+    recalc();
+  });
+
+  var mv = document.getElementById("modeVan"), mb = document.getElementById("modeBus");
+  function setMode(m){
+    state.mode = m;
+    mv.setAttribute("aria-pressed", m === "van");
+    mb.setAttribute("aria-pressed", m === "bus");
+    recalc();
+  }
+  mv.addEventListener("click", function(){ setMode("van"); });
+  mb.addEventListener("click", function(){ setMode("bus"); });
+
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    seedRates();
+    state.pax = 11; state.km = 450; 
+    document.getElementById("pax").value = 11;
+    document.getElementById("km").value = 450;
+    setMode("van");
+  });
+
+  var d = document.getElementById("tripDate");
+  d.addEventListener("focus", function(){ if (d.value === "3 / 4 October") d.value = ""; });
+  d.addEventListener("blur",  function(){ if (!d.value.trim()) d.value = "3 / 4 October"; });
+
+  recalc();
+})();
+</script>
+</body>
+</html>
