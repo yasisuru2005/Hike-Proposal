@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kirigalpotta — hike proposal for 11</title>
+<title>Kirigalpotta — hike proposal for 15</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
@@ -115,13 +115,7 @@
     background:rgba(255,255,255,.07);color:var(--paper);
     border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:7px 10px;
   }
-  .ctl input:focus,.seg button:focus-visible{outline:2px solid var(--patana);outline-offset:2px}
-  .seg{display:inline-flex;background:rgba(255,255,255,.09);border-radius:7px;padding:3px;gap:3px}
-  .seg button{
-    font-size:14px;font-weight:600;color:var(--mist);background:transparent;border:0;
-    padding:8px 14px;border-radius:5px;cursor:pointer;
-  }
-  .seg button[aria-pressed=true]{background:var(--patana);color:#231a06}
+  .ctl input:focus{outline:2px solid var(--patana);outline-offset:2px}
 
   .headline-cost{text-align:right}
   .headline-cost .num{
@@ -163,6 +157,7 @@
 
   /* ---------- compare ---------- */
   .compare{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule-strong);border-radius:10px;overflow:hidden;margin-top:22px}
+  .compare.single{grid-template-columns:1fr;max-width:420px}
   .opt{background:var(--paper-2);padding:22px}
   .opt.win{background:var(--ink);color:var(--paper)}
   .opt h3{font-size:17px;margin-bottom:2px}
@@ -240,7 +235,7 @@
   }
   @media print{
     .console{background:#fff;color:#000;border:1px solid #000}
-    .seg,.actions{display:none}
+    .actions{display:none}
     .opt.win{background:#fff;color:#000;border:2px solid #000}
     .altrail,.scene,.patana-band,.flora,.bird{display:none!important}
     .reveal{opacity:1!important;transform:none!important}
@@ -487,7 +482,7 @@
     <div class="fact"><dt>Leaving</dt><dd>Fri night, Colombo</dd></div>
     <div class="fact"><dt>Hike</dt><dd>Sat 3rd</dd></div>
     <div class="fact"><dt>Camp</dt><dd>Ohiya, booked</dd></div>
-    <div class="fact"><dt>Group</dt><dd><span id="factPax">11</span> people</dd></div>
+    <div class="fact"><dt>Group</dt><dd><span id="factPax">15</span> people</dd></div>
     <div class="fact"><dt>Away</dt><dd>2 nights, 1 on the road</dd></div>
   </dl>
 </header>
@@ -524,24 +519,13 @@
       <div class="controls">
         <div class="ctl">
           <label for="pax">People going</label>
-          <input id="pax" type="number" min="1" max="30" step="1" value="11">
-        </div>
-        <div class="ctl">
-          <label for="km">Total km, return</label>
-          <input id="km" type="number" min="0" step="10" value="450">
-        </div>
-        <div class="ctl">
-          <label>Getting there</label>
-          <div class="seg" role="group" aria-label="Transport option">
-            <button type="button" id="modeVan" aria-pressed="true">Hired van</button>
-            <button type="button" id="modeBus" aria-pressed="false">NCG coach</button>
-          </div>
+          <input id="pax" type="number" min="1" max="30" step="1" value="15">
         </div>
       </div>
       <div class="headline-cost">
-        <span class="num" id="perHead">Rs 12,741</span>
+        <span class="num" id="perHead">Rs 12,820</span>
         <span class="cap">per person, all in</span>
-        <span class="total">Trip total <span id="grand">Rs 140,150</span> · collect <span id="collect">Rs 14,000</span> each</span>
+        <span class="total">Trip total <span id="grand">Rs 192,300</span> · collect <span id="collect">Rs 14,000</span> each</span>
       </div>
     </div>
 
@@ -610,65 +594,43 @@
     </div>
 
     <div class="sec-head">
-      <h2>Van or coach?</h2>
-      <span class="tag">Van, clearly</span>
+      <h2>Getting there</h2>
+      <span class="tag">Bus, chartered</span>
     </div>
-    <p class="lede">The coach fare alone looks cheap. The problem is the last 30 km: Ohiya is not on the NCG route, and a Friday night coach drops you at Haputale in the small hours with eleven people, camping gear, and no way to reach a gate that opens at 6 am.</p>
+    <p class="lede">The NCG coach fare alone looks cheap, but the last 30 km kills it: Ohiya is not on the route, and a Friday night coach drops you at Haputale in the small hours with fifteen people, camping gear, and no way to reach a gate that opens at 6 am. A chartered bus solves that door-to-door and has the seats a single van no longer does at this headcount.</p>
 
-    <div class="compare">
+    <div class="compare single">
       <div class="opt win">
-        <span class="verdict">Recommended</span>
-        <h3>One 14-seat KDH van, Friday night to Sunday</h3>
-        <span class="big" id="cmpVan">Rs 63,250</span>
-        <span class="per" id="cmpVanPer">Rs 5,750 each</span>
+        <span class="verdict">Booked</span>
+        <h3>Chartered bus, Friday night to Sunday</h3>
+        <span class="big" id="transportTotal">Rs 95,000</span>
+        <span class="per" id="transportPer">Rs 6,333 each</span>
         <ul>
           <li>Leave when you want on Friday night, no fixed departure</li>
           <li>Sleep on the way and wake at the gate</li>
           <li>Carries tents, cooking kit and the water cans</li>
           <li>Stays with you Saturday for the Ohiya–gate runs</li>
-        </ul>
-      </div>
-      <div class="opt">
-        <h3>NCG coach plus local transfers</h3>
-        <span class="big" id="cmpBus">Rs 86,150</span>
-        <span class="per" id="cmpBusPer">Rs 7,832 each</span>
-        <ul>
-          <li>Drops at Haputale — still 19 km short of Ohiya</li>
-          <li>Two hired transfers plus jeeps to the park gate</li>
-          <li>Arrives around 3–4 am with nowhere to wait</li>
-          <li>Fixed seats, no room for tents, and dearer in the end</li>
+          <li>One flat rate — driver, fuel, permit and parking all included</li>
         </ul>
       </div>
     </div>
 
     <h3 style="margin-top:34px">What to pin down before you pay a deposit</h3>
-    <p>Local van owners quote one of two ways. Get the quote in writing either way, because the difference between them on a 450 km trip is real money.</p>
+    <p>A flat charter is simpler to quote than a per-kilometre hire, but confirm exactly what is bundled into the Rs 95,000 before you pay anything.</p>
 
     <div class="terms">
       <dl>
-        <dt>Per-kilometre hire</dt>
-        <dd>Rs 100–150 per km for a KDH with driver, fuel included, with a minimum of 100–150 km charged per day whether you drive it or not. Rs 110/km is a fair local rate to aim for.</dd>
+        <dt>What's included</dt>
+        <dd>Get it in writing that driver, fuel, the night-driving allowance, the park vehicle permit and parking are all inside the Rs 95,000, so nothing gets added later as a separate line.</dd>
 
-        <dt>Day package</dt>
-        <dd>Rs 15,000–25,000 per day, which typically includes 100–150 km. Anything beyond that is billed as excess.</dd>
+        <dt>Seat count and layout</dt>
+        <dd>Ask for a bus that seats fifteen comfortably with room left over for tents, cooking kit and the water cans — not fifteen with gear stacked on laps.</dd>
 
-        <dt>Excess kilometres</dt>
-        <dd>Rs 60–150 per km depending on the operator. Tourist-facing firms bill around USD 0.43, roughly Rs 130. Ask for the number before you sign, not after.</dd>
+        <dt>Driver's rest before the return leg</dt>
+        <dd>A 10:30 pm departure Friday followed by a Sunday afternoon return is a long shift either side of the hike. Confirm there's a second driver or a proper rest break built in before the Sunday drive back.</dd>
 
-        <dt>How km are counted</dt>
-        <dd>Most owners count garage to garage, not from your pickup point. On a Colombo–Ohiya round trip that can add 30–50 km. Ask which it is.</dd>
-
-        <dt>Driver allowance</dt>
-        <dd>Rs 2,500–4,000 per night for meals and a place to sleep on Saturday, plus about Rs 1,000 night parking. A night-driving surcharge applies between 8 pm and 5 am, which covers almost the whole Friday run — get it quoted as a figure, not a vague extra.</dd>
-
-        <dt>The three-day minimum</dt>
-        <dd>This hire touches three calendar days, so a 150 km-per-day minimum clause means 450 km billed whether you drive it or not. That happens to match the real distance here, but confirm you are billed on actual kilometres, otherwise a shorter route saves you nothing.</dd>
-
-        <dt>If you use a member's own van</dt>
-        <dd>About 450 km at roughly 10 km per litre, with auto diesel at Rs 407, comes to around Rs 18,300 in fuel. Cheaper on paper, but somebody has to drive up a hill road at 3 am and then not hike.</dd>
-
-        <dt>Park vehicle entry</dt>
-        <dd>Rs 250–1,000 at the Horton Plains gate depending on the vehicle. Budget Rs 750 for a van and carry cash.</dd>
+        <dt>Deposit and cancellation</dt>
+        <dd>Get the deposit amount and refund terms in writing before paying, especially since the permit and parking costs are now bundled into the same figure.</dd>
       </dl>
     </div>
   </section>
@@ -709,14 +671,14 @@
       <h2>Friday night to Sunday</h2>
       <span class="tag">The hike lands on Saturday morning</span>
     </div>
-    <p class="lede">Driving through the night puts you at the gate for the 6 am opening with the whole day in hand, which is what Kirigalpotta needs — 14 km return, six to seven hours, and mist that closes in by mid-morning in October. The cost is that nobody will have slept properly before a hard hike. Plan the van seats for sleeping and keep Friday night quiet.</p>
+    <p class="lede">Driving through the night puts you at the gate for the 6 am opening with the whole day in hand, which is what Kirigalpotta needs — 14 km return, six to seven hours, and mist that closes in by mid-morning in October. The cost is that nobody will have slept properly before a hard hike. Plan the bus seats for sleeping and keep Friday night quiet.</p>
 
     <div class="day reveal">
       <h3>Friday 2 October — the overnight run</h3>
       <div class="stop"><time>9:30 pm</time><p>Eat before you leave<span class="det">Proper dinner in Colombo. Nothing on this route is open at 2 am.</span></p></div>
-      <div class="stop"><time>10:30 pm</time><p>Van leaves Colombo<span class="det">Pick-ups along the Kottawa–Nugegoda side, then Ratnapura, Balangoda, Beragala, Haputale. Roughly six hours with a stop.</span></p></div>
+      <div class="stop"><time>10:30 pm</time><p>Bus leaves Colombo<span class="det">Pick-ups along the Kottawa–Nugegoda side, then Ratnapura, Balangoda, Beragala, Haputale. Roughly six hours with a stop.</span></p></div>
       <div class="stop"><time>2:00 am</time><p>Tea stop around Balangoda<span class="det">Stretch, and let the driver rest properly — he still has the hill road ahead.</span></p></div>
-      <div class="stop"><time>4:30 am</time><p>Reach Ohiya<span class="det">The site is yours from Saturday evening, not now, so tents and cooking kit stay in the van and ride up to the gate with you. No problem — the van is parked there all day anyway.</span></p></div>
+      <div class="stop"><time>4:30 am</time><p>Reach Ohiya<span class="det">The site is yours from Saturday evening, not now, so tents and cooking kit stay in the bus and ride up to the gate with you. No problem — the bus is parked there all day anyway.</span></p></div>
     </div>
 
     <div class="day reveal">
@@ -792,7 +754,7 @@
     <div class="flags">
       <div class="flag hot reveal d1">
         <h4>Does Rs 9,400 buy the site or eight beds?</h4>
-        <p>The site is booked and yours from Saturday evening. The only thing left to confirm is whether that figure covers the pitch regardless of headcount, or eight sleeping spots with three people unaccounted for. Ask the operator for the tent count in writing, then zero out the top-up line or leave it in.</p>
+        <p>The site is booked and yours from Saturday evening. The only thing left to confirm is whether that figure covers the pitch regardless of headcount, or eight sleeping spots with seven people unaccounted for. Ask the operator for the tent count in writing, then zero out the top-up line or leave it in.</p>
       </div>
       <div class="flag hot reveal d1">
         <h4>No polythene past the gate</h4>
@@ -804,7 +766,7 @@
       </div>
       <div class="flag reveal d2">
         <h4>Take a tracker for Kirigalpotta</h4>
-        <p>There is no separate permit — the park ticket covers the trail. But it is unmarked, groups do get lost on the way down, and eleven people spread across a bog is exactly how that happens. Budget for a park tracker or guide.</p>
+        <p>There is no separate permit — the park ticket covers the trail. But it is unmarked, groups do get lost on the way down, and fifteen people spread across a bog is exactly how that happens. Budget for a park tracker or guide.</p>
       </div>
       <div class="flag hot reveal d1">
         <h4>October is the wet half of the year</h4>
@@ -812,15 +774,15 @@
       </div>
       <div class="flag hot reveal d1">
         <h4>Nobody will have slept</h4>
-        <p>A six-hour overnight drive followed straight by a seven-hour hike is the real risk in this plan. Eat properly on Friday evening, keep the van quiet after Balangoda, and set the 10 am turnaround so a tired group is not still descending in afternoon mist.</p>
+        <p>A six-hour overnight drive followed straight by a seven-hour hike is the real risk in this plan. Eat properly on Friday evening, keep the bus quiet after Balangoda, and set the 10 am turnaround so a tired group is not still descending in afternoon mist.</p>
       </div>
       <div class="flag reveal d2">
-        <h4>Book the van this week</h4>
-        <p>The 3rd and 4th are a Saturday and Sunday, three weeks out. Good KDH owners are taken early for weekends, and you need one who will do a 10:30 pm departure without inflating the night surcharge.</p>
+        <h4>Book the bus this week</h4>
+        <p>The 3rd and 4th are a Saturday and Sunday, three weeks out. Good charter operators are taken early for weekends, and you need one who will do a 10:30 pm departure without inflating the night surcharge.</p>
       </div>
       <div class="flag reveal d2">
-        <h4>Everything rides in the van on Saturday</h4>
-        <p>Because the site opens Saturday evening, tents and cooking kit spend the whole hiking day in the van at the park gate. Pack so that what you need on the trail is in daypacks and nothing valuable is left loose in the vehicle.</p>
+        <h4>Everything rides in the bus on Saturday</h4>
+        <p>Because the site opens Saturday evening, tents and cooking kit spend the whole hiking day in the bus at the park gate. Pack so that what you need on the trail is in daypacks and nothing valuable is left loose in the vehicle.</p>
       </div>
     </div>
   </section>
@@ -854,7 +816,7 @@
   </div>
 
   <div class="footnote reveal">
-    <p>Figures are planning estimates built from published rates in mid-2026: Horton Plains local adult entry at Rs 150 before service charge and VAT, local KDH hire at Rs 100–150 per km, auto diesel at Rs 407 a litre, and luxury coach fares of about Rs 2,200–2,400 for Colombo to the Haputale–Bandarawela stretch. Park fees and fuel both move without much notice, so treat the totals as a budget to work against rather than a quote.</p>
+    <p>Figures are planning estimates built from published rates in mid-2026: Horton Plains local adult entry at Rs 150 before service charge and VAT, and private bus charters for a Colombo–Ohiya overnight run of this length running roughly Rs 90,000–110,000 all-inclusive. Park fees and charter rates both move without much notice, so treat the totals as a budget to work against rather than a quote.</p>
   </div>
 </div>
 
@@ -865,36 +827,10 @@
   var fmt = function(n){ return "Rs " + Math.round(n).toLocaleString("en-US"); };
 
   var DEFAULTS = {
-    van: [
-      {k:"vanhire", label:"Van hire — 14-seat KDH, Friday night to Sunday",
-       hint:"Rate per km, fuel and driver included. 450 km covers Colombo–Ohiya return plus the two park gate runs.",
-       basis:"per km", rate:110, qty:"km"},
-      {k:"batta", label:"Driver allowance",
-       hint:"Meals, a night out at Ohiya on Saturday, night parking, and the overnight driving surcharge for the Friday run.",
-       basis:"group", rate:6500},
-      {k:"vehperm", label:"Park vehicle permit",
-       hint:"Charged at the Horton Plains gate. Cash only.",
-       basis:"group", rate:750},
-      {k:"parking", label:"Parking and tolls",
-       basis:"group", rate:500},
-      {k:"tcont", label:"Transport contingency",
-       hint:"Excess kilometres, a breakdown, or a change of plan on the road.",
-       basis:"group", rate:6000}
-    ],
-    bus: [
-      {k:"fare1", label:"Coach fare — Colombo to Haputale",
-       hint:"NCG or equivalent luxury service. Book seats ahead for a weekend.",
-       basis:"per head", rate:2200},
-      {k:"fare2", label:"Coach fare — Haputale to Colombo",
-       basis:"per head", rate:2200},
-      {k:"xfer", label:"Haputale ⇄ Ohiya transfers",
-       hint:"Two hired vans each way for 11 people and gear, 19 km of hill road.",
-       basis:"group", rate:18000},
-      {k:"jeep", label:"Ohiya ⇄ park gate",
-       hint:"Jeeps for the pre-dawn run up to the gate and back.",
-       basis:"group", rate:12000},
-      {k:"vehperm2", label:"Park vehicle permit", basis:"group", rate:750},
-      {k:"tcont2", label:"Transport contingency", basis:"group", rate:7000}
+    transport: [
+      {k:"bushire", label:"Chartered bus — Friday night to Sunday",
+       hint:"Flat rate. Driver, fuel, the night-driving allowance, the park vehicle permit and parking are all included, plus the Ohiya–gate runs on Saturday.",
+       basis:"group", rate:95000}
     ],
     food: [
       {k:"bfast", label:"Breakfast — Saturday, at the gate",
@@ -930,9 +866,9 @@
        basis:"group", rate:6000},
       {k:"camp", label:"Campsite and equipment — booked",
        hint:"Yours from Saturday evening to Sunday afternoon. Paid.", basis:"group", rate:9400},
-      {k:"camptop", label:"Camping top-up for 3 more",
+      {k:"camptop", label:"Camping top-up for 7 more",
        hint:"Only applies if the Rs 9,400 buys 8 sleeping spots rather than the whole site. Zero this out if the site is yours regardless of headcount.",
-       basis:"group", rate:3600},
+       basis:"group", rate:8400},
       {k:"kit", label:"Extra kit",
        hint:"Gas canister, headlamps, rain covers, first aid, leech socks.",
        basis:"group", rate:4000},
@@ -942,11 +878,11 @@
     ]
   };
 
-  var state = { mode:"van", pax:11, km:450, rates:{} };
+  var state = { pax:15, rates:{} };
 
   function seedRates(){
     state.rates = {};
-    ["van","bus","food","trail"].forEach(function(g){
+    ["transport","food","trail"].forEach(function(g){
       DEFAULTS[g].forEach(function(it){ state.rates[it.k] = it.rate; });
     });
   }
@@ -954,14 +890,12 @@
 
   function amountOf(it){
     var r = state.rates[it.k];
-    if (it.basis === "per km")   return r * state.km;
     if (it.basis === "per head") return r * state.pax;
     if (it.basis === "drinkers") return r * it.count;
     return r;
   }
 
   function basisLabel(it){
-    if (it.basis === "per km")   return state.km + " km";
     if (it.basis === "per head") return state.pax + " people";
     if (it.basis === "drinkers") return it.count + " people";
     return "one-off";
@@ -1015,13 +949,11 @@
   }
 
   function recalc(){
-    var transportItems = state.mode === "van" ? DEFAULTS.van : DEFAULTS.bus;
-
-    renderTable("tblTransport", transportItems);
+    renderTable("tblTransport", DEFAULTS.transport);
     renderTable("tblFood", DEFAULTS.food);
     renderTable("tblTrail", DEFAULTS.trail);
 
-    var t = sum(transportItems), f = sum(DEFAULTS.food), r = sum(DEFAULTS.trail);
+    var t = sum(DEFAULTS.transport), f = sum(DEFAULTS.food), r = sum(DEFAULTS.trail);
     var grand = t + f + r;
     var per = state.pax > 0 ? grand / state.pax : 0;
 
@@ -1034,12 +966,8 @@
     document.getElementById("collect").textContent = fmt(Math.round(per * 1.1 / 500) * 500);
     document.getElementById("factPax").textContent = state.pax;
 
-    // side-by-side comparison always shows both, at current rates
-    var vanT = sum(DEFAULTS.van), busT = sum(DEFAULTS.bus);
-    document.getElementById("cmpVan").textContent = fmt(vanT);
-    document.getElementById("cmpBus").textContent = fmt(busT);
-    document.getElementById("cmpVanPer").textContent = fmt(state.pax ? vanT/state.pax : 0) + " each";
-    document.getElementById("cmpBusPer").textContent = fmt(state.pax ? busT/state.pax : 0) + " each";
+    document.getElementById("transportTotal").textContent = fmt(t);
+    document.getElementById("transportPer").textContent = fmt(state.pax ? t/state.pax : 0) + " each";
   }
 
   document.getElementById("pax").addEventListener("input", function(e){
@@ -1047,29 +975,13 @@
     state.pax = (isNaN(v) || v < 1) ? 1 : v;
     recalc();
   });
-  document.getElementById("km").addEventListener("input", function(e){
-    var v = parseFloat(e.target.value);
-    state.km = isNaN(v) ? 0 : v;
-    recalc();
-  });
-
-  var mv = document.getElementById("modeVan"), mb = document.getElementById("modeBus");
-  function setMode(m){
-    state.mode = m;
-    mv.setAttribute("aria-pressed", m === "van");
-    mb.setAttribute("aria-pressed", m === "bus");
-    recalc();
-  }
-  mv.addEventListener("click", function(){ setMode("van"); });
-  mb.addEventListener("click", function(){ setMode("bus"); });
 
   document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
   document.getElementById("resetBtn").addEventListener("click", function(){
     seedRates();
-    state.pax = 11; state.km = 450; 
-    document.getElementById("pax").value = 11;
-    document.getElementById("km").value = 450;
-    setMode("van");
+    state.pax = 15;
+    document.getElementById("pax").value = 15;
+    recalc();
   });
 
   var d = document.getElementById("tripDate");
