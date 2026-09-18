@@ -976,6 +976,14 @@
     recalc();
   });
 
+  // Select the whole value on focus so typing replaces it in one go,
+  // instead of having to backspace out the old number first.
+  document.addEventListener("focus", function(e){
+    if (e.target && e.target.tagName === "INPUT" && e.target.type === "number"){
+      e.target.select();
+    }
+  }, true);
+
   document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
   document.getElementById("resetBtn").addEventListener("click", function(){
     seedRates();
